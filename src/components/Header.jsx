@@ -11,6 +11,8 @@ const Search = lazy(() => import("./Search"));
 const Header = () => {
   const { verification ,Logout,Notification} = useAdmin();
   const NotificationData = useSelector((state) => state.auth.notificationdata);
+ const api=process.env.REACT_APP_OPENAI_API_KEY
+ console.log(api);
  
   useEffect(() => {
    

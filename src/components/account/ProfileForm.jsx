@@ -29,6 +29,9 @@ const ProfileForm = () => {
   useEffect(() => {
     ProfileDetails();
   }, []);
+
+  console.log(userData);
+  
   useEffect(() => {
     if (userData) {
       setUserDatas({
