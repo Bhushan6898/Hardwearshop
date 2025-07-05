@@ -1,7 +1,7 @@
 const SettingForm = () => {
   return (
     <div className="card border-danger">
-      <h6 className="card-header">
+      {/* <h6 className="card-header">
         <i className="bi bi-gear-fill text-danger"></i> Settiing
       </h6>
       <ul className="list-group list-group-flush">
@@ -29,7 +29,7 @@ const SettingForm = () => {
             Submit
           </button>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

@@ -1,132 +1,111 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { compose } from "redux";
-import {
-  renderFormGroupField,
-  renderFormTextArea,
-  renderFormCheckbox,
-} from "../helpers/renderForm";
-import {
-  required,
-  maxLength50,
-  name,
-  maxLengthMobileNo,
-  minLengthMobileNo,
-  digit,
-  email,
-  maxLength1000,
-} from "../helpers/validation";
-import { ReactComponent as IconPerson } from "bootstrap-icons/icons/person.svg";
-import { ReactComponent as IconBuilding } from "bootstrap-icons/icons/building.svg";
-import { ReactComponent as IconPhone } from "bootstrap-icons/icons/phone.svg";
-import { ReactComponent as IconEnvelope } from "bootstrap-icons/icons/envelope.svg";
+import React from 'react';
 
-const ContactUsForm = (props) => {
-  const { handleSubmit, submitting, onSubmit, submitFailed } = props;
+const ContactSection = ({ handleSubmit, handleChange, formData }) => {
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
-      noValidate
-    >
-      <div className="row">
-        <div className="col-md-6">
-          <Field
-            name="name"
-            type="text"
-            label="Name"
-            component={renderFormGroupField}
-            placeholder="Your full name"
-            icon={IconPerson}
-            required={true}
-            validate={[required, maxLength50, name]}
-            pattern="[a-zA-Z\s]*"
-            maxLength="50"
-            className="mb-3"
-          />
-        </div>
-        <div className="col-md-6">
-          <Field
-            name="company"
-            type="text"
-            label="Company"
-            component={renderFormGroupField}
-            placeholder="Your company name"
-            icon={IconBuilding}
-            required={true}
-            validate={[required, maxLength50]}
-            maxLength="50"
-            className="mb-3"
-          />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-md-6">
-          <Field
-            name="mobileNo"
-            type="number"
-            label="Mobile no"
-            component={renderFormGroupField}
-            placeholder="Mobile no with country code"
-            icon={IconPhone}
-            validate={[required, maxLengthMobileNo, minLengthMobileNo, digit]}
-            required={true}
-            max="999999999999999"
-            min="9999"
-            className="mb-3"
-          />
-        </div>
-        <div className="col-md-6">
-          <Field
-            name="email"
-            type="email"
-            label="Email address"
-            component={renderFormGroupField}
-            placeholder="Your email address"
-            icon={IconEnvelope}
-            validate={[required, maxLength50, email]}
-            maxLength="50"
-            required={true}
-            className="mb-3"
-          />
-        </div>
-      </div>
-      <div className="row g-3">
-        <div className="col-md-12">
-          <Field
-            name="message"
-            label="Message"
-            maxLength="1000"
-            component={renderFormTextArea}
-            validate={maxLength1000}
-            placeholder="What you are looking for?"
-          />
-        </div>
-        <div className="col-md-12">
-          <Field
-            id="informed"
-            label="Keep me informed via email or phone about its Products and Services."
-            name="informed"
-            component={renderFormCheckbox}
-          />
-        </div>
-      </div>
-      <div className="d-grid">
-        <button
-          type="submit"
-          className="btn btn-primary mt-3"
-          disabled={submitting}
+    <div className="py-5" id="contact" style={{ position: 'relative' }}>
+      <img
+        src="https://png.pngtree.com/thumb_back/fh260/background/20220217/pngtree-businesswoman-using-contact-icon-interface-photo-image_29649620.jpg"
+        alt="Contact Us"
+        className="img-fluid rounded w-100 mb-4"
+        style={{
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          zIndex: '-1',
+          height: '100%',
+          objectFit: 'cover',
+          opacity: '0.7',
+        }}
+      />
+      <div className="container-fluid" style={{ position: 'relative', zIndex: '1' }}>
+        <h2
+          className="text-center mb-5 display-5"
+          style={{
+            color: 'linear-gradient(to right, #ff7e5f, #feb47b)',
+            background: 'linear-gradient(to right, #ff7e5f, #feb47b)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontWeight: 'bold',
+            textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3)',
+          }}
         >
-          Submit
-        </button>
+          Contact Us
+        </h2>
+
+        <div className="row">
+          <div className="col-md-6 col-lg-6 col-sm-12 mb-4">
+            <div
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '8px',
+                padding: '20px',
+              }}
+            >
+              <form onSubmit={handleSubmit}>
+                <div className="form-group mb-4">
+                  <label htmlFor="name">Your Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                <div className="form-group mb-4">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div className="form-group mb-4">
+                  <label htmlFor="message">Message</label>
+                  <textarea
+                    className="form-control"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="3"
+                    placeholder="Your message"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary mb-1 w-100">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className="col-md-6 col-lg-6 col-sm-12 mb-4">
+            <div
+              className="p-4"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.29)',
+                borderRadius: '8px',
+              }}
+            >
+              <h5>Address:</h5>
+              <p>m46 Kunzer Road, Kalmadu 424106, Jalgon</p>
+              <h5>Email:</h5>
+              <p>patil.bhushan6898@gmail.com</p>
+              <h5>Phone:</h5>
+              <p>+91 7507546145</p>
+              <h5>Working Hours:</h5>
+              <p>Monday - Saturday, 8 AM - 9 PM</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   );
 };
 
-export default compose(
-  reduxForm({
-    form: "demo1",
-  })
-)(ContactUsForm);
+export default ContactSection;

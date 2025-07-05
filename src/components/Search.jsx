@@ -1,7 +1,7 @@
 const Search = () => {
   return (
-    <form action="#" className="search">
-      <div className="input-group">
+    <form action="#" className="search" >
+      <div className="input-group" style={{marginLeft:"-30px"}}>
         <input
           id="search"
           name="search"

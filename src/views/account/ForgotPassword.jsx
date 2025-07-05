@@ -11,7 +11,7 @@ const ForgotPasswordView = () => {
     <div className="container my-3">
       <div className="row justify-content-md-center ">
         <div className="col-md-4 p-3 border">
-          <h4 className="text-center">Forgot Password</h4>
+          <h4 className="text-center">Forgot Passwordg</h4>
           <ForgotPasswordForm onSubmit={onSubmit} />
         </div>
       </div>

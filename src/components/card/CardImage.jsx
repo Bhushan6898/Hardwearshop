@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const CardImage = (props) => {
   return (
-    <Link to={props.to}>
-      <div className={`card shadow-sm ${props.className}`}>
+    <Link >
+      <div className={`card shadow-sm `}>
         <div className="card-body p-0">
           <img
-            src={props.src}
+           src="../../images/category/paint.jpg"
             className="img-fluid rounded"
-            alt="..."
+            alt="ddf"
           />
         </div>
       </div>

@@ -9,19 +9,6 @@ const Footer = () => {
             Get connected with us on social networks!
           </div>
           <div className="col-md-3 py-3 text-center text-white">
-            <Link to="/" title="Apple">
-              <i className="bi bi-apple text-light me-3"></i>
-            </Link>
-            <Link to="/" title="Windows">
-              <i className="bi bi-windows text-light me-3"></i>
-            </Link>
-            <Link to="/" title="Android">
-              <i className="bi bi-android2 text-light me-3"></i>
-            </Link>
-            |
-            <Link to="/" title="Twitter">
-              <i className="bi bi-twitter-x text-light ms-3 me-3"></i>
-            </Link>
             <Link to="/" title="Facebook">
               <i className="bi bi-facebook text-light me-3"></i>
             </Link>
@@ -37,13 +24,10 @@ const Footer = () => {
       <div className="container-fluid bg-dark text-white">
         <div className="row ">
           <div className="col-md-3 py-3">
-            <div className="h6">Company Name</div>
+            <div className="h6">Mahalaxmi Hardwere</div>
             <hr />
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
+              Welcome to Mahalaxmi Hardware Shop, your one-stop destination for all your hardware needs. We offer a wide range of high-quality tools, building materials, and home improvement products at competitive prices.
             </p>
           </div>
           <div className="col-md-3 py-3">
@@ -52,46 +36,55 @@ const Footer = () => {
             <ul className="list-group list-group-flush">
               <li className="list-group-item bg-dark text-white border-light">
                 <Link
-                  to="/"
+                  to="/tools"
                   className="text-decoration-none text-white stretched-link"
                 >
-                  Electronics
+                  Tools
                 </Link>
               </li>
               <li className="list-group-item bg-dark text-white border-light">
                 <Link
-                  to="/"
+                  to="/fasteners"
                   className="text-decoration-none text-white stretched-link"
                 >
-                  Mobiles
+                  Fasteners
                 </Link>
               </li>
               <li className="list-group-item bg-dark text-white border-light">
                 <Link
-                  to="/"
+                  to="/paint"
                   className="text-decoration-none text-white stretched-link"
                 >
-                  Car & bike
+                  Paints & Coatings
                 </Link>
               </li>
               <li className="list-group-item bg-dark text-white border-light">
                 <Link
-                  to="/"
+                  to="/lumber"
                   className="text-decoration-none text-white stretched-link"
                 >
-                  Super Market
+                  Lumber & Building Materials
                 </Link>
               </li>
               <li className="list-group-item bg-dark text-white border-light">
                 <Link
-                  to="/"
+                  to="/plumbing"
                   className="text-decoration-none text-white stretched-link"
                 >
-                  Travel Cards
+                  Plumbing Supplies
+                </Link>
+              </li>
+              <li className="list-group-item bg-dark text-white border-light">
+                <Link
+                  to="/electrical"
+                  className="text-decoration-none text-white stretched-link"
+                >
+                  Electrical Supplies
                 </Link>
               </li>
             </ul>
           </div>
+
           <div className="col-md-3 py-3">
             <div className="h6">Policy</div>
             <hr />
@@ -142,19 +135,19 @@ const Footer = () => {
             <div className="h6">Address</div>
             <hr />
             <address>
-              <strong>Twitter, Inc.</strong>
+              <strong>Instagram.</strong>
               <br />
-              1355 Market St, Suite 900
+              Mahalaxmi Hardwere
               <br />
-              San Francisco, CA 94103
+              Kalmadu Pin Code is 424106.
               <br />
-              <abbr title="Phone">P:</abbr> (123) 456-7890
+              <abbr title="Phone">Phone:</abbr>9730183353
             </address>
             <div className="h6">Customer Care</div>
             <hr />
-            <i className="bi bi-telephone"></i> +1800 100 1000
+            <i className="bi bi-telephone"></i> +7507546145
             <br />
-            <i className="bi bi-envelope"></i> info@email.com
+            <i className="bi bi-envelope"></i> patil.bhushan6898@email.com
           </div>
         </div>
       </div>
@@ -176,8 +169,8 @@ const Footer = () => {
             </Link>
           </div>
           <div className="col-md-3 py-2">
-            © 2009-{new Date().getFullYear()} React-E-Commerce.com (
-            {process.env.REACT_APP_VERSION})
+            © 2016-{new Date().getFullYear()} malaluxmi hardwere.com
+
           </div>
           <div className="col-md-3 py-2 bg-white">
             <img

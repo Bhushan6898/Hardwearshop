@@ -3,7 +3,7 @@ import React from "react";
 const CardListForm = () => {
   return (
     <div className="card border-success">
-      <h6 className="card-header">
+      {/* <h6 className="card-header">
         <i className="bi bi-credit-card-2-front-fill text-success"></i> Saved Card
         <button className="btn btn-sm btn-primary float-end">
           <i className="bi bi-plus-lg text-light"></i>
@@ -28,7 +28,7 @@ const CardListForm = () => {
             <i className="bi bi-trash"></i>
           </button>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

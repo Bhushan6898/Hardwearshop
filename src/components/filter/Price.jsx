@@ -1,6 +1,19 @@
 import React from "react";
 
-const FilterPrice = (props) => {
+const FilterPrice = ({ onPriceFilterChange, selectedPriceRange }) => {
+  const priceRanges = [
+    { id: "priceRange1", label: "1.00 - 100.00", count: 10 },
+    { id: "priceRange2", label: "100.00 - 300.00", count: 8 },
+    { id: "priceRange3", label: "300.00 - 600.00", count: 6 },
+    { id: "priceRange4", label: "600.00 - 1,500.00", count: 4 },
+    { id: "priceRange5", label: "1,500.00 - 3,000.00", count: 3 },
+    { id: "priceRange6", label: "3,000.00 & Above", count: 2 },
+  ];
+
+  const handlePriceRangeChange = (range) => {
+    onPriceFilterChange(range);
+  };
+
   return (
     <div className="card mb-3">
       <div
@@ -13,42 +26,29 @@ const FilterPrice = (props) => {
         Price
       </div>
       <ul className="list-group list-group-flush show" id="filterPrice">
-        <li className="list-group-item">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault1"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault1">
-              $24.00 - $29.00 <span className="text-muted">(4)</span>
-            </label>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault2"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault2">
-              $33.00 - $35.00 <span className="text-muted">(2)</span>
-            </label>
-          </div>
-        </li>
-        <li className="list-group-item">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="flexCheckDefault3"
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault3">
-              $70.00 - $99.00 <span className="text-muted">(5)</span>
-            </label>
-          </div>
-        </li>
+        {priceRanges.map(({ id, label, count }) => (
+          <li
+            key={id}
+            className={`list-group-item ${
+              selectedPriceRange === id ? "text-dark bg-secondary fw-bold" : "text-muted"
+            }`}
+            style={{ cursor: "pointer" }}
+            onClick={() => handlePriceRangeChange(id)}
+          >
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id={id}
+                checked={selectedPriceRange === id}
+                onChange={() => handlePriceRangeChange(id)}
+              />
+              <label className="form-check-label" htmlFor={id}>
+                {label} <span className="text-muted">({count})</span>
+              </label>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );

@@ -1,9 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const FilterCategory = (props) => {
+const FilterCategory = ({ onCategorySelect, selectedCategory }) => {
+  const categories = [
+    "Nuts & Bolts",
+    "Cement",
+    "Agricultural Tools",
+    "Building Materials",
+    "Plumbing Supplies",
+    "Electrical Tools",
+    "Paint & Finishing Supplies",
+    "Hand Tools",
+    "Power Tools",
+    "Gardening Tools",
+    "Safety Equipment",
+    "Machinery & Equipment",
+    "Welding Supplies",
+    "Automotive Tools",
+    "Fasteners",
+    "Adhesives & Sealants",
+    "Cleaning Supplies",
+    "Flooring Materials",
+    "Lighting Fixtures",
+    "Roofing Materials",
+    "Waterproofing Solutions",
+    "Pipes & Fittings",
+    "Insulation Materials",
+    "Wood & Timber",
+    "Glass & Glazing",
+    "Metal Fabrication Tools",
+  ];
+
+  const handleCategorySelect = (category) => {
+    onCategorySelect(category); // Notify parent component
+  };
+
   return (
-    <div className="card mb-3 accordion">
+    <div className="card mb-3">
       <div
         className="card-header fw-bold text-uppercase accordion-icon-button"
         data-bs-toggle="collapse"
@@ -13,40 +45,30 @@ const FilterCategory = (props) => {
       >
         Categories
       </div>
-      <ul
-        className="list-group list-group-flush show"
-        id="filterCategory"
-      >
-        <li className="list-group-item">
-          <Link to="/" className="text-decoration-none stretched-link">
-            Clothing
-          </Link>
+      <ul className="list-group list-group-flush" id="filterCategory">
+        <li
+          className={`list-group-item ${
+            selectedCategory === null ? "text-dark bg-secondary fw-bold" : "text-muted"
+          }`}
+          style={{ cursor: "pointer" }}
+          onClick={() => handleCategorySelect(null)}
+        >
+          All
         </li>
-        <li className="list-group-item">
-          <Link to="/" className="text-decoration-none stretched-link">
-            Leather Bag
-          </Link>
-        </li>
-        <li className="list-group-item">
-          <Link to="/" className="text-decoration-none stretched-link">
-            Trausers
-          </Link>
-        </li>
-        <li className="list-group-item">
-          <Link to="/" className="text-decoration-none stretched-link">
-            Sweater & Cardigans
-          </Link>
-        </li>
-        <li className="list-group-item">
-          <Link to="/" className="text-decoration-none stretched-link">
-            High Heels
-          </Link>
-        </li>
-        <li className="list-group-item">
-          <Link to="/" className="text-decoration-none stretched-link">
-            Coats & Jackets
-          </Link>
-        </li>
+        {categories.map((category, index) => (
+          <li
+            key={index}
+            className={`list-group-item ${
+              selectedCategory === category
+                ? "text-dark fw-bold"
+                : "text-muted"
+            }`}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleCategorySelect(category)}
+          >
+            {category}
+          </li>
+        ))}
       </ul>
     </div>
   );

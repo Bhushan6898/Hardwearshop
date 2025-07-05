@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { Suspense, useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -7,74 +7,70 @@ import TopMenu from "./components/TopMenu";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.min.css";
-//const Header = lazy(() => import("./components/Header"));
-//const TopMenu = lazy(() => import("./components/TopMenu"));
-const HomeView = lazy(() => import("./views/Home"));
-const SignInView = lazy(() => import("./views/account/SignIn"));
-const SignUpView = lazy(() => import("./views/account/SignUp"));
-const ForgotPasswordView = lazy(() => import("./views/account/ForgotPassword"));
-const OrdersView = lazy(() => import("./views/account/Orders"));
-const WishlistView = lazy(() => import("./views/account/Wishlist"));
-const NotificationView = lazy(() => import("./views/account/Notification"));
-const MyProfileView = lazy(() => import("./views/account/MyProfile"));
-const ProductListView = lazy(() => import("./views/product/List"));
-const ProductDetailView = lazy(() => import("./views/product/Detail"));
-const StarZoneView = lazy(() => import("./views/product/StarZone"));
-const CartView = lazy(() => import("./views/cart/Cart"));
-const CheckoutView = lazy(() => import("./views/cart/Checkout"));
-const InvoiceView = lazy(() => import("./views/cart/Invoice"));
-const DocumentationView = lazy(() => import("./views/Documentation"));
-const NotFoundView = lazy(() => import("./views/pages/404"));
-const InternalServerErrorView = lazy(() => import("./views/pages/500"));
-const ContactUsView = lazy(() => import("./views/pages/ContactUs"));
-const SupportView = lazy(() => import("./views/pages/Support"));
-const BlogView = lazy(() => import("./views/blog/Blog"));
-const BlogDetailView = lazy(() => import("./views/blog/Detail"));
+import { appRoutes } from "./routes";
+import { useSelector } from "react-redux";
+import SignInView from "./views/account/SignIn";
+import SignUpView from "./views/account/SignUp";
+import LandingPage from "./components/landingpage";
+import { OrbitProgress } from "react-loading-indicators";
+import SmartTalkIcon from "./components/SmartTalkIcon";
 
 function App() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  // Loading state to track the authentication check and delay
+  const [loading, setLoading] = useState(true);
+  const [showSidebarAndNavbar, setShowSidebarAndNavbar] = useState(false);
+
+  useEffect(() => {
+    // Simulate a delay for checking authentication
+    const timeout = setTimeout(() => {
+      setShowSidebarAndNavbar(isAuthenticated); // Update visibility of sidebar and navbar
+      setLoading(false);  // Once the check is done, set loading to false
+    }, 1000); // 2 seconds delay
+
+    return () => clearTimeout(timeout); // Clean up the timeout on unmount
+  }, [isAuthenticated]);
+
+  // Show loading spinner while checking authentication status with delay
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+         <OrbitProgress color="#32cd32" size="medium" text="Loading" textColor="" />
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <React.Fragment>
-        <Header />
-        <TopMenu />
-        <Suspense
-          fallback={
-            <div className="text-white text-center mt-3">Loading...</div>
-          }
-        >
+        {/* Show header and top menu if authenticated */}
+        {showSidebarAndNavbar && (
+          <>
+            <Header />
+            <TopMenu />
+           
+          </>
+        )}
+        <Suspense fallback={<div className="text-white text-center mt-3">Loading...</div>}>
           <Routes>
-            <Route exact path="/" element={<HomeView/>} />
-            <Route exact path="/account/signin" element={<SignInView/>} />
-            <Route exact path="/account/signup" element={<SignUpView/>} />
-            <Route
-              exact
-              path="/account/forgotpassword"
-              element={<ForgotPasswordView/>}
-            />
-            <Route exact path="/account/profile" element={<MyProfileView/>} />
-            <Route exact path="/account/orders" element={<OrdersView/>} />
-            <Route exact path="/account/wishlist" element={<WishlistView/>} />
-            <Route
-              exact
-              path="/account/notification"
-              element={<NotificationView/>}
-            />
-            <Route exact path="/category" element={<ProductListView/>} />
-            <Route exact path="/product/detail" element={<ProductDetailView/>} />
-            <Route exact path="/star/zone" element={<StarZoneView/>} />
-            <Route exact path="/cart" element={<CartView/>} />
-            <Route exact path="/checkout" element={<CheckoutView />} />
-            <Route exact path="/invoice" element={<InvoiceView />} />
-            <Route exact path="/documentation" element={<DocumentationView/>} />
-            <Route exact path="/contact-us" element={<ContactUsView/>} />
-            <Route exact path="/support" element={<SupportView/>} />
-            <Route exact path="/blog" element={<BlogView/>} />
-            <Route exact path="/blog/detail" element={<BlogDetailView/>} />
-            <Route exact path="/500" element={<InternalServerErrorView/>} />
-            <Route path="*" element={<NotFoundView/>} />
+            <Route path="/account/signup" element={<SignUpView />} />
+            <Route path="/signin" element={<SignInView />} />
+            {/* If not authenticated, show LandingPage for any route */}
+            {!isAuthenticated ? (
+              <Route path="*" element={<LandingPage />} />
+            ) : (
+              appRoutes.map((route, index) => (
+                <Route key={index} path={route.path} element={route.element} />
+              ))
+            )}
+            {/* Redirect to home if authenticated, otherwise show LandingPage */}
+            <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
+            <Route path="" element={isAuthenticated ? <Navigate to="/home" /> : <LandingPage />} />
           </Routes>
         </Suspense>
-        <Footer />
+        {/* Show footer if authenticated */}
+        {showSidebarAndNavbar && <Footer />}
       </React.Fragment>
     </BrowserRouter>
   );

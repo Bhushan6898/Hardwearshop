@@ -1,0 +1,74 @@
+.container {
+    background-color: #f8f9fa; /* Soft light grey color */
+    padding: 20px; /* Add some padding for aesthetics */
+    border-radius: 8px; /* Rounded corners for a softer look */
+}
+
+.card {
+    background-color: rgb(246, 242, 242); /* Card background should remain white */
+    border: none; /* Remove card border if you want a cleaner look */
+}
+  
+  .table-primary {
+    background-color: #e9f5ff; /* Light blue background for the table */
+  }
+  
+  h3, h4 {
+    color: #007bff; /* Primary color for headings */
+  }
+  
+  .text-primary {
+    color: #007bff; /* Primary color for text */
+  }
+  
+  .text-secondary {
+    color: #6c757d; /* Secondary color for text */
+  }
+  
+  .border-primary {
+    border-color: #007bff !important; /* Primary color for form controls */
+  }
+/* src/components/billinggdata.css */
+
+.billing-data-container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.billing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.billing-table th,
+.billing-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.billing-table th {
+  background-color: #4CAF50; /* Green background for headers */
+  color: white;
+}
+
+.billing-table tr:hover {
+  background-color: #f1f1f1; /* Light grey on hover */
+}
+
+.product-list {
+  padding-left: 20px; /* Indent the product list */
+  margin: 0; /* Remove default margin */
+  list-style-type: none; /* Remove bullet points */
+}
+
+.product-item {
+  margin: 5px 0; /* Add some space between list items */
+}
+
+.product-item strong {
+  color: #333; /* Make product name bold and dark */
+}

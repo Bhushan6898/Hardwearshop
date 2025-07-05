@@ -1,34 +1,39 @@
 import { lazy } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { BaseURL } from "../../repository/repository";
+
+import backgroundImg from '../../images/images.jpeg';
 const SignInForm = lazy(() => import("../../components/account/SignInForm"));
 
 const SignInView = () => {
   const onSubmit = async (values) => {
     alert(JSON.stringify(values));
   };
+  const { t } = useTranslation();
   return (
-    <div className="container my-3">
-      <div className="row border">
-        <div className="col-md-6 bg-light bg-gradient p-3 d-none d-md-block">
-          <Link to="/">
+    <div className="container my-3"  style={{
+      backgroundImage: `url(${"data:image/jpeg;base64,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"})`,
+      backgroundSize: "cover",
+    
+      backgroundRepeat: "no-repeat",
+    }}>
+      <div className="row " >
+        <div className="col-md-6  p-3  d-md-block">
+          
+          <Link to="/signin">
             <img
-              src="../../images/banner/Dell.webp"
-              alt="..."
-              className="img-fluid"
-            />
-          </Link>
-          <Link to="/">
-            <img
-              src="../../images/banner/Laptops.webp"
+              src="../../images/signup\login1.png"
               alt="..."
               className="img-fluid"
             />
           </Link>
         </div>
         <div className="col-md-6 p-3">
-          <h4 className="text-center">Sign In</h4>
-          <SignInForm onSubmit={onSubmit} />
-        </div>
+  {/* <h4 className="text-center"> {t("signIn")}</h4> */}
+  {/* <img src={logo} className="img-fluid" alt="Logo" style={{maxHeight:'250px',marginLeft:'120px'}} /> */}
+  <SignInForm onSubmit={onSubmit} />
+</div>
       </div>
     </div>
   );

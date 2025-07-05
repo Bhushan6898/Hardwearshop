@@ -85,3 +85,16 @@
 .accordion-icon-button.collapsed {
   border-bottom: none;
 }
+
+.top-right {
+  top: 0;
+  right: 0;
+}
+body {
+  background-color: #6a85a0; /* Change this to your desired color */
+  margin: 0; /* Optional: removes default margin */
+  padding: 0; /* Optional: removes default padding */
+  font-family: Arial, sans-serif; /* Optional: sets a default font */
+}
+
+

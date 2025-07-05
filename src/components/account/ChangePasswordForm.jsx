@@ -1,66 +1,132 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import { compose } from "redux";
-import renderFormGroupField from "../../helpers/renderFormGroupField";
-import { required, maxLength20, minLength8 } from "../../helpers/validation";
+import React, { useState } from "react";
 import { ReactComponent as IconShieldLock } from "bootstrap-icons/icons/shield-lock.svg";
+import { ReactComponent as IconCheck } from "bootstrap-icons/icons/check.svg"; // Import the check icon
+import useAdmin from "../../hooks/useUser";
 
-const ChangePasswordForm = (props) => {
-  const { handleSubmit, submitting, onSubmit, submitFailed } = props;
+const ChangePasswordForm = () => {
+  const { updatepassword } = useAdmin();
+  const [formData, setFormData] = useState({
+    currentPassword: "",
+    password: "",
+    confirmPassword: "",
+  });
+ 
+
+  // Track if passwords match
+  const passwordsMatch = formData.password && formData.password === formData.confirmPassword;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+ 
+
+    const password = formData.password;
+    try {
+      await updatepassword({ password });
+
+      // Clear the form after successful submission
+      // setFormData({
+      //   currentPassword: "",
+      //   password: "",
+      //   confirmPassword: "",
+      // });
+    } catch (error) {
+      console.error("Password update failed", error);
+    } finally {
+     // Always set submitting to false after completion
+    }
+  };
+
   return (
     <div className="card border-info">
       <h6 className="card-header bg-info text-white">
-      <i className="bi bi-key"></i> Change Password
+        <i className="bi bi-key"></i> Change Password
       </h6>
       <div className="card-body">
         <form
-          onSubmit={handleSubmit(onSubmit)}
-          className={`needs-validation ${submitFailed ? "was-validated" : ""}`}
-          noValidate
+          onSubmit={handleSubmit}
         >
-          <Field
-            name="currentPassword"
-            type="password"
-            label="Current Password"
-            component={renderFormGroupField}
-            placeholder="******"
-            icon={IconShieldLock}
-            validate={[required, maxLength20, minLength8]}
-            required={true}
-            maxLength="20"
-            minLength="8"
-            className="mb-3"
-          />
-          <Field
-            name="password"
-            type="password"
-            label="New Password"
-            component={renderFormGroupField}
-            placeholder="******"
-            icon={IconShieldLock}
-            validate={[required, maxLength20, minLength8]}
-            required={true}
-            maxLength="20"
-            minLength="8"
-            className="mb-3"
-          />
-          <Field
-            name="confirmPassword"
-            type="password"
-            label="Confirm New password"
-            component={renderFormGroupField}
-            placeholder="******"
-            icon={IconShieldLock}
-            validate={[required, maxLength20, minLength8]}
-            required={true}
-            maxLength="20"
-            minLength="8"
-            className="mb-3"
-          />
+          <div className="mb-3">
+            <label htmlFor="currentPassword">Current Password</label>
+            <div className="input-group">
+              <span className="input-group-text">
+                <IconShieldLock />
+              </span>
+              <input
+                name="currentPassword"
+                type="password"
+                className="form-control"
+                placeholder="******"
+                value={formData.currentPassword}
+                onChange={handleInputChange}
+                required
+                maxLength="20"
+                minLength="8"
+              />
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password">New Password</label>
+            <div className="input-group">
+              <span className="input-group-text">
+                <IconShieldLock />
+              </span>
+              <input
+                name="password"
+                type="password"
+                className="form-control"
+                placeholder="******"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+                maxLength="20"
+                minLength="8"
+              />
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="confirmPassword">Confirm New Password</label>
+            <div className="input-group">
+              <span className="input-group-text">
+                <IconShieldLock />
+              </span>
+              <input
+                name="confirmPassword"
+                type="password"
+                className={`form-control ${
+                  passwordsMatch ? "is-valid" : formData.confirmPassword ? "is-invalid" : ""
+                }`}
+                placeholder="******"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                required
+                maxLength="20"
+                minLength="8"
+              />
+              {passwordsMatch && (
+                <span className="input-group-text text-success">
+                  <IconCheck /> {/* OK icon when passwords match */}
+                </span>
+              )}
+            </div>
+            {!passwordsMatch && formData.confirmPassword && (
+              <div className="invalid-feedback">Passwords do not match</div>
+            )}
+          </div>
+
           <button
             type="submit"
-            className="btn btn-info  d-flex"
-            disabled={submitting}
+            className="btn btn-info d-flex"
+           
           >
             Submit
           </button>
@@ -70,8 +136,4 @@ const ChangePasswordForm = (props) => {
   );
 };
 
-export default compose(
-  reduxForm({
-    form: "changepassword",
-  })
-)(ChangePasswordForm);
+export default ChangePasswordForm;
