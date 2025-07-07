@@ -122,7 +122,7 @@ console.log("API Key:", apiKey);
                         "url('https://img.freepik.com/free-photo/top-view-steel-hammer-with-other-construction-elements-tools_23-2150576394.jpg?ga=GA1.1.1066422692.1737459805&semt=ais_hybrid')",
                     backgroundSize: backgroundSize,
                     backgroundPosition: "center",
-                    padding: "0",
+                    padding: "5px",
                     color: "#fff",
                     textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)",
                     position: "relative",
@@ -303,7 +303,7 @@ console.log("API Key:", apiKey);
             />
 
 
-            <footer className=" py-5 mt-1 bg-secondary" style={{ border: '1px solid #ddd', borderRadius: '8px' }}>
+            <footer className=" py-5 mt-1 bg-secondary" style={{ border: '1px solid #ddd', borderRadius: '8px',padding:"3px" }}>
                 <div className="container-fliud " >
                     <div className="row">
                         {/* About Section */}

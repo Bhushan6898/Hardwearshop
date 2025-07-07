@@ -153,6 +153,7 @@ const useAdmin = () => {
       } else if (response.status === 401) {
         toast.warn(response.data?.message);
       }
+      return response;
     } catch (error) {
       if (error.response) {
         toast.warn(error.response.data?.message);

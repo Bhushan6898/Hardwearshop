@@ -3,12 +3,12 @@ import { Form, Button, Container, Row, Col, Card, Image } from 'react-bootstrap'
 import { useDropzone } from 'react-dropzone';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import useAdmin from '../../hooks/useUser';
+import LodingPage from '../../lodingPage';
 
 const AddProductPage = () => {
   const { AddProduct } = useAdmin();
   const [productData, setProductData] = useState({
     name: '',
-    description: '',
     price: '',
     stock: '',
     category: '',
@@ -16,6 +16,7 @@ const AddProductPage = () => {
     sku: '',
   });
   const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false); // Loading state
 
   const handleChange = (e) => {
     setProductData({
@@ -28,31 +29,41 @@ const AddProductPage = () => {
     setImage(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    for (const key in productData) {
-      formData.append(key, productData[key]);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      for (const key in productData) {
+        formData.append(key, productData[key]);
+      }
+      formData.append('image', image);
+
+      const response = await AddProduct(formData);
+     
+      
+      if (response) {
+        // setProductData({
+        //   name: '',
+        //   description: '',
+        //   price: '',
+        //   stock: '',
+        //   category: '',
+        //   brand: '',
+        //   sku: '',
+        // });
+        setImage(null);
+      }
+    } catch (error) {
+      console.error("Error in add product", error);
+    } finally {
+      setLoading(false);
     }
-    formData.append('image', image);
-
-    // Call AddProduct and reset form state after completion
-    await AddProduct(formData);
-    setProductData({
-      name: '',
-      description: '',
-      price: '',
-      stock: '',
-      category: '',
-      brand: '',
-      sku: '',
-    });
-    setImage(null);
   };
-
 
   return (
     <div className='container-fluide  bg-secondary'>
+       {loading && <LodingPage />}
     <div className=" min-vh-100 d-flex justify-content-center align-items-center">
     <div className="col-md-6 col-lg-5 shadow-lg p-4 rounded bg-light">
       <Form onSubmit={handleSubmit} className="p-4">

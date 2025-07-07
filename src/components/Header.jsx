@@ -9,14 +9,14 @@ import SmartTalkIcon from "./SmartTalkIcon";
 const Search = lazy(() => import("./Search"));
 
 const Header = () => {
-  const { verification ,Logout,Notification} = useAdmin();
+  const { verification,ProfileDetails, userData, Logout} = useAdmin();
   const NotificationData = useSelector((state) => state.auth.notificationdata);
- const api=process.env.REACT_APP_OPENAI_API_KEY
- console.log(api);
- 
+
+
   useEffect(() => {
-   
+
     verification();
+    ProfileDetails();
   }, []);
   // Logout function
   const handleLogout = () => {
@@ -27,19 +27,19 @@ const Header = () => {
       backgroundImage: `url(${background})`, // Applying the background image
       backgroundSize: 'cover', // Ensures the image covers the entire header
       backgroundPosition: 'center', // Centers the image
-     // Adjust the height as per your design
+      // Adjust the height as per your design
     }}>
       <div className="container-fluid">
         <div className="row g-1">
-           <div className="col-md-3 text-center" >
-          <Link to="/">
-        <img
-          alt="logo"
-          src={logo}
-          style={{ width: '300px', height: 'auto',marginLeft:"-2px" }} 
-        />
-      </Link>
-    </div>
+          <div className="col-md-3 text-center" >
+            <Link to="/">
+              <img
+                alt="logo"
+                src={logo}
+                style={{ width: '300px', height: 'auto', marginLeft: "-2px" }}
+              />
+            </Link>
+          </div>
           <div className="col-md-5">
             <Search />
           </div>
@@ -55,21 +55,27 @@ const Header = () => {
             <div className="btn-group">
               <button
                 type="button"
-                className="btn btn-secondary rounded-circle border me-3"
-                data-toggle="dropdown"
+                className="btn btn-secondary rounded-circle border me-3 p-0 overflow-hidden"
+                data-bs-toggle="dropdown"
                 aria-expanded="false"
                 aria-label="Profile"
-                data-bs-toggle="dropdown"
+                style={{ width: "40px", height: "40px" }} // Adjust size as needed
               >
-                <i className="bi bi-person-fill text-light"></i>
+                <img
+                  src={userData?.profileImage}
+                  alt="Profile"
+                  className="img-fluid rounded-circle"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </button>
-             <Link  className="btn  rounded-circle border me-3" to="/account/notification">
+
+              <Link className="btn  rounded-circle border me-3" to="/account/notification">
                 <i className="bi bi-bell-fill text-white"></i>
                 <div className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle">
-                 {NotificationData.length}
+                  {NotificationData.length}
                 </div>
-                </Link>
-                
+              </Link>
+
               <ul className="dropdown-menu">
                 <li>
                   <Link className="dropdown-item" to="/account/profile">
@@ -110,7 +116,7 @@ const Header = () => {
                   <hr className="dropdown-divider" />
                 </li> */}
                 <li>
-                  <Link className="dropdown-item"   onClick={handleLogout}>
+                  <Link className="dropdown-item" onClick={handleLogout}>
                     <i className="bi bi-door-closed-fill text-danger"></i>
                     Logout
                   </Link>
@@ -119,11 +125,11 @@ const Header = () => {
             </div>
             {/* <Link to="/account/signin">Sign In</Link> |{" "}
               <Link to="/account/signup"> Sign Up</Link> */}
-               <div className="tolkicon">
-                <SmartTalkIcon />
-              </div>
+            <div className="tolkicon">
+              <SmartTalkIcon />
+            </div>
           </div>
-          
+
         </div>
       </div>
     </header>

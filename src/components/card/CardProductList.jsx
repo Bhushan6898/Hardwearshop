@@ -7,7 +7,7 @@ const CardProductList = (props) => {
     <div className="row g-0">
       <div className="col-md-3 text-center">
         <img
-          src={`https://m-server-5449.onrender.com${product.imageUrl}`}
+          src={product.imageUrl}
           className="img-fluid"
           alt={product.name}
         />

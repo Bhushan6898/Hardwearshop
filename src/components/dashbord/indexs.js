@@ -32,17 +32,9 @@ import { classNames } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-//import { BaseURL } from '../../repository/repository';
-const BaseURL="https://m-server-5449.onrender.com"
-
-// Sample data
 
 
-const users = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'Active' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'Inactive' },
-  { id: 3, name: 'Alice Johnson', email: 'alice@example.com', status: 'Active' },
-];
+
 
 const inventoryData = [
   { product: 'Hammer', stock: 50 },
@@ -68,11 +60,7 @@ const salesByCategoryData = [
 
 
 
-const recentActivitiesData = [
-  "User John Doe registered.",
-  "User Jane Smith updated profile.",
-  "Bill created for Alice Johnson.",
-];
+;
 
 const Dashboard = () => {
   const navigate = useNavigate(); // Initialize navigate
@@ -406,7 +394,7 @@ const Dashboard = () => {
                 <TableRow key={user._id} hover>
                   <TableCell>
                     <img
-                      src={`${BaseURL}/${user.profileImage}`} // Construct the full URL for the image
+                      src={`${user.profileImage}`} // Construct the full URL for the image
                       alt="Profile"
                       style={{ width: '50px', height: '50px', borderRadius: '50%' }} // Styling for the image
                     />

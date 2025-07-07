@@ -98,18 +98,24 @@ async getProduct() {
 return response;
 }
 async postPRODUCT(payload) {
-const response = await Repository.post('/product/add-product',payload)
-  .then((response) => {
- 
+  let headers = {};
+
+  // Don't set Content-Type if payload is FormData
+  if (!(payload instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  try {
+    const response = await Repository.post('/product/add-product', payload, {
+      headers,
+    });
     return response;
-    
-  })
-  .catch((error) => {
-    console.log(error);
-    return error;
-  });
-return response;
+  } catch (error) {
+    console.log('Axios error:', error);
+    throw error; // Let the error bubble up
+  }
 }
+
 async deleteProduct(payload) {
   const response = await Repository.post('/product/delete-product',payload)
   .then((response) => {

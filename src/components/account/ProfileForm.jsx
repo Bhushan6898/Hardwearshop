@@ -4,7 +4,8 @@ import { ReactComponent as IconPhone } from "bootstrap-icons/icons/phone.svg";
 import { ReactComponent as IconEnvelop } from "bootstrap-icons/icons/envelope.svg";
 import { ReactComponent as IconGeoAlt } from "bootstrap-icons/icons/geo-alt.svg";
 import useAdmin from "../../hooks/useUser";
-import { BaseURL } from "../../repository/repository";
+import LodingPage from "../../lodingPage";
+
 
 const ProfileForm = () => {
   const { ProfileDetails, userData,verification,updateprofile} = useAdmin();
@@ -25,6 +26,7 @@ const ProfileForm = () => {
   });
   const [imagePreview, setImagePreview] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   useEffect(() => {
     ProfileDetails();
@@ -76,6 +78,7 @@ const handleImageChange = (e) => {
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  setLoading(true);
   try {
     // Create form data object
     const formData = new FormData();
@@ -97,17 +100,23 @@ const handleSubmit = async (e) => {
     const response = await updateprofile(formData);
     if (response && response.user) {
      
-      setImagePreview(`${BaseURL}${response.user.profileImage}`);
+      setImagePreview(`${response.user.profileImage}`);
+      
     }
+    
   } catch (error) {
     console.error("Error updating profile", error);
   }
+   finally {
+      setLoading(false); // Stop loading
+    }
 };
 
 
 
   return (
     <form  className="container">
+         {loading && <LodingPage />}
       <div className="card border-primary my-4">
         <h6 className="card-header bg-primary text-white">
           <i className="bi bi-person-lines-fill" /> Profile Detail
