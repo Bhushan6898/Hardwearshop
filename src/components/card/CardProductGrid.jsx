@@ -8,7 +8,7 @@ const CardProductGrid = (props) => {
   return (
     <div className="card">
   <img
-   src={`${BaseURL}${product.imageUrl}`}
+   src={product.imageUrl}
     
     className="card-img-top"
     alt={product.name}

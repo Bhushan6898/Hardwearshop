@@ -37,9 +37,10 @@ const AddProductPage = () => {
       for (const key in productData) {
         formData.append(key, productData[key]);
       }
-      formData.append('image', image);
+      formData.append('productImage', image);
 
       const response = await AddProduct(formData);
+     console.log(response);
      
       
       if (response) {

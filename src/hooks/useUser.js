@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import UserRepository from "../repository/userRepository";
 import { useNavigate } from "react-router-dom";
-import { logOut, login, setBillDatas, setNotificationdata, setProductDatas,setUserdata} from "../store/auth/reduser.slice";
+import { logOut, login, setBillDatas, setNotificationdata, setProductDatas, setUserdata } from "../store/auth/reduser.slice";
 import { useDispatch } from "react-redux";
 
 const useAdmin = () => {
@@ -19,7 +19,7 @@ const useAdmin = () => {
         toast.success(response.data?.message);
         setLoading(true);
         return response;
-      } else if (response.response.status === 401)  {
+      } else if (response.response.status === 401) {
         toast.warn(response.response.data?.message);
       }
     } catch (error) {
@@ -38,7 +38,7 @@ const useAdmin = () => {
         toast.success(response.data?.message);
         setLoading(true);
         return response;
-      } else if (response.response.status === 401)  {
+      } else if (response.response.status === 401) {
         toast.warn(response.response.data?.message);
       }
     } catch (error) {
@@ -53,7 +53,7 @@ const useAdmin = () => {
   const genrateotp = async (payload) => {
     try {
       const response = await UserRepository.otpgenrate(payload);
-      
+
       if (response.status === 200) {
         console.log(response);
         toast.success(response.data?.message);
@@ -72,16 +72,16 @@ const useAdmin = () => {
     try {
       const response = await UserRepository.Loginhere(payload);
       console.log(response);
-      
+
       if (response.status === 200) {
         const { role, _id: id } = response.data.user;
-        dispatch(login({ role, id })); 
-        
+        dispatch(login({ role, id }));
+
         toast.success(response.data?.message);
-        setLoading(true); 
-        navigate("/"); 
+        setLoading(true);
+        navigate("/");
         return response;
-      } else if (response.response.status === 401) { 
+      } else if (response.response.status === 401) {
         toast.warn(response.response.data?.message);
       }
     } catch (error) {
@@ -93,12 +93,12 @@ const useAdmin = () => {
     try {
       const response = await UserRepository.Logout();
       if (response.status === 200) {
-       
-        dispatch(logOut()); 
+
+        dispatch(logOut());
         toast.success(response.data?.message);
-       
+
         return response;
-      } else if (response.status === 401) { 
+      } else if (response.status === 401) {
         toast.warn(response.data?.message);
       }
     } catch (error) {
@@ -109,11 +109,11 @@ const useAdmin = () => {
 
   const verification = async () => {
     try {
-   
+
       const response = await UserRepository.getverification();
       if (response.status === 200) {
-        const { role,  id } = response.data;
-        dispatch(login({ role, id })); 
+        const { role, id } = response.data;
+        dispatch(login({ role, id }));
       } else {
         toast.warn(response.data?.message);
       }
@@ -151,7 +151,14 @@ const useAdmin = () => {
         setLoading(true);
         return response;
       } else if (response.status === 401) {
-        toast.warn(response.data?.message);
+        toast.warn(response.
+          response
+          .data?.message);
+      }
+      else if (response.status === 400) {
+        toast.warn(response.
+          response
+          .data?.message);
       }
       return response;
     } catch (error) {
@@ -250,29 +257,29 @@ const useAdmin = () => {
         toast.warn(error.response.data?.message);
       } else {
         toast.error("Failed to fetch bills.");
-        
+
       }
       console.log(error);
     }
   };
   const updatepassword = async (payload) => {
-    
+
     try {
       setLoading(true); // Set loading to true at the start of the request
-  
+
       const response = await UserRepository.updatepassword(payload);
-  
+
       if (response?.status === 200) {
         toast.success(response?.data?.message);
         setLoading(false);
         return response;
       }
-  
+
       if (response?.response?.status === 400) {
         console.log(response.response.status);
         toast.warn(response?.response?.data?.message);
       }
-  
+
       setLoading(false); // Make sure loading is turned off after handling responses
     } catch (error) {
       console.error(error);
@@ -282,8 +289,8 @@ const useAdmin = () => {
   };
   const updateprofile = async (payload) => {
     try {
-      setLoading(true); 
-  
+      setLoading(true);
+
       const response = await UserRepository.updateprofile(payload);
       if (response?.status === 200) {
         toast.success(response?.data?.message);
@@ -294,20 +301,20 @@ const useAdmin = () => {
         console.log(response.response.status);
         toast.warn(response?.response?.data?.message);
       }
-  
-      setLoading(false); 
+
+      setLoading(false);
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while updating the password.");
-      setLoading(false); 
+      setLoading(false);
     }
   };
   const getUsers = async () => {
     try {
       const response = await UserRepository.getUser();
       if (response.status === 200) {
-       const data=response?.data?.users
-      dispatch(setUserdata({ data:data}));
+        const data = response?.data?.users
+        dispatch(setUserdata({ data: data }));
         setLoading(true);
         return response;
       } else if (response.status === 401) {
@@ -318,7 +325,7 @@ const useAdmin = () => {
         toast.warn(error.response.data?.message);
       } else {
         toast.error("Failed to fetch bills.");
-        
+
       }
       console.log(error);
     }
@@ -326,12 +333,12 @@ const useAdmin = () => {
   const Notification = async () => {
     try {
       const response = await UserRepository.getNotificayion();
-     
+
       if (response.status === 200) {
         console.log(response);
-        
-        const data=response?.data?.notification
-        dispatch(setNotificationdata({ data:data}));
+
+        const data = response?.data?.notification
+        dispatch(setNotificationdata({ data: data }));
         setLoading(true);
         return response;
       } else if (response.status === 401) {
@@ -342,7 +349,7 @@ const useAdmin = () => {
         toast.warn(error.response.data?.message);
       } else {
         toast.error("Failed to fetch bills.");
-        
+
       }
       console.log(error);
     }
@@ -350,8 +357,8 @@ const useAdmin = () => {
   const Logs = async () => {
     try {
       const response = await UserRepository.getLogs();
-     console.log(response);
-     
+      console.log(response);
+
       if (response.status === 200) {
         setLogsData(response?.data.logs);
         // const data=response?.data?.logs;
@@ -366,20 +373,20 @@ const useAdmin = () => {
         toast.warn(error.response.data?.message);
       } else {
         toast.error("Failed to fetch bills.");
-        
+
       }
       console.log(error);
     }
-    
+
   };
   const updateclient = async (payload) => {
     try {
-      setLoading(true); 
-  
+      setLoading(true);
+
       const response = await UserRepository.updatedataclient(payload);
       if (response?.status === 200) {
         console.log(response);
-        
+
         toast.success(response?.data?.message);
         setLoading(false); // Set loading to false after success
         return response;
@@ -388,15 +395,15 @@ const useAdmin = () => {
         console.log(response.response.status);
         toast.warn(response?.response?.data?.message);
       }
-  
-      setLoading(false); 
+
+      setLoading(false);
     } catch (error) {
       console.error(error);
       toast.error("An error occurred while updating the password.");
-      setLoading(false); 
+      setLoading(false);
     }
   };
-  
+
   return {
     userData,
     loading,
