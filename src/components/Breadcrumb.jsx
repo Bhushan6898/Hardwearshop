@@ -12,7 +12,7 @@ const Breadcrumb = () => {
         </li>
        
         <li className="breadcrumb-item active" aria-current="page">
-        plumbing material
+        Products
         </li>
       </ol>
     </nav>

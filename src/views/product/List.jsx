@@ -103,7 +103,7 @@ const clearFiltersHandler = () => {
     <React.Fragment>
       <div className="p-5 bg-primary bs-cover">
         <div className="text-center">
-          <span className="display-5 px-3 rounded">Mahaluxmi Hardware</span>
+          <span className="display-5 px-3 rounded">PRODUCTS</span>
         </div>
       </div>
       <Breadcrumb />

@@ -37,7 +37,7 @@ const TopMenu = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav">
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <button
                 className="btn nav-link dropdown-toggle fw-bold"
                 id="navbarDropdown"
@@ -80,9 +80,9 @@ const TopMenu = () => {
                 <Link className="dropdown-item" to="/blog/detail">
                   {t('blogDetail')}
                 </Link>
-              </li> */}
+              </li> *
               </ul>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/category">
               Products
