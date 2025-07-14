@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import logo from "../../src/images/mylogo.png";
 const Footer = () => {
   return (
     <footer>
@@ -24,6 +24,14 @@ const Footer = () => {
       <div className="container-fluid bg-dark text-white">
         <div className="row ">
           <div className="col-md-3 py-3">
+            {/* Logo added above title */}
+            <div className="mb-2  ">
+              <img
+                src={logo} 
+                alt="Mahalaxmi Hardware Logo"
+                style={{ width: "80px", height: "80px" }}
+              />
+            </div>
             <div className="h6">Mahalaxmi Hardwere</div>
             <hr />
             <p>
@@ -170,7 +178,6 @@ const Footer = () => {
           </div>
           <div className="col-md-3 py-2">
             © 2016-{new Date().getFullYear()} malaluxmi hardwere.com
-
           </div>
           <div className="col-md-3 py-2 bg-white">
             <img
