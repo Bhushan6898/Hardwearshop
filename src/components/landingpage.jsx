@@ -12,16 +12,30 @@ import { loadLanguages } from "i18next";
 import { BlinkBlur, OrbitProgress } from "react-loading-indicators";
 import logo from "../../src/images/mylogo.png";
 const LandingPage = () => {
-  const { verification, ContactUs } = useAdmin();
+  const { verification, ContactUs ,getvisitor} = useAdmin();
   const [loading, setLoading] = useState(false);
+  const [visitorCount, setVisitorCount] = useState(0);
+   const [visitor, setVisitor] = useState(0);
+  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
   useEffect(() => {
-    verification();
-  }, []);
+  verification();
+
+  const fetchVisitor = async () => {
+    const count = await getvisitor();
+
+    setVisitorCount(count.data.total);
+    setVisitor(count.data.today);
+  };
+
+  fetchVisitor();
+}, []);
+
   const apiKey = process.env.REACT_APP_API_KEY;
   console.log("API Key:", apiKey);
   const handleChange = (e) => {
@@ -443,7 +457,7 @@ const LandingPage = () => {
                 </ul>
               </div>
 
-              {/* Social Media Section */}
+              {/* Address Section */}
               <div className="col-md-4 mb-4">
                 <h5
                   className="text-uppercase mb-3"
@@ -456,41 +470,51 @@ const LandingPage = () => {
                     textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
                   }}
                 >
-                  Follow Us
+                  Address
                 </h5>
+                <address className="text-light mb-3">
+                  Mahalaxmi Hardware<br />
+                  Kalmadu, Pin Code: 424106<br />
+                  <abbr title="Phone">Phone:</abbr> 9730183353
+                </address>
+                <h6 className="text-light mb-2">Customer Care</h6>
+                <div className="mb-2">
+                  <i className="bi bi-telephone"></i> +7507546145
+                </div>
                 <div>
-                  <a
-                    href="#"
-                    className="btn btn-outline-light btn-sm rounded-circle me-2"
-                  >
-                    <i className="bi bi-facebook"></i>
-                  </a>
-                  <a
-                    href="#"
-                    className="btn btn-outline-light btn-sm rounded-circle me-2"
-                  >
-                    <i className="bi bi-twitter"></i>
-                  </a>
-                  <a
-                    href="#"
-                    className="btn btn-outline-light btn-sm rounded-circle me-2"
-                  >
-                    <i className="bi bi-instagram"></i>
-                  </a>
-                  <a
-                    href="#"
-                    className="btn btn-outline-light btn-sm rounded-circle"
-                  >
-                    <i className="bi bi-envelope-fill"></i>
-                  </a>
+                  <i className="bi bi-envelope"></i> patil.bhushan6898@email.com
                 </div>
               </div>
             </div>
 
             <div className="row mt-4">
+              {/* Visitor Count Box */}
+              <div className="col-12 mb-3 d-flex justify-content-center">
+                <div
+                  style={{
+                   
+                  
+                   
+                   
+                    padding: "16px 32px",
+                    minWidth: "220px",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <div>
+                    <span role="img" aria-label="eye" style={{fontSize:"1.5rem", marginRight:"8px"}}>👁️</span>
+                    Visitors Today: <span style={{color:"#007bff"}}>{visitor}</span>
+                  </div>
+                  <div>
+                    <span role="img" aria-label="users" style={{fontSize:"1.5rem", marginRight:"8px"}}>👥</span>
+                    Total Visitors: <span style={{color:"#28a745"}}>{visitorCount}</span>
+                  </div>
+                </div>
+              </div>
               <div className="col text-center">
                 <p className="mb-0">
-                  © 2024 Mahaluxmi Hardware Shop. All rights reserved.
+                 © 2016-{new Date().getFullYear()}  Mahaluxmi Hardware Shop. All rights reserved.
                 </p>
               </div>
             </div>

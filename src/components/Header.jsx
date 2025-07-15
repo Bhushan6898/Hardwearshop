@@ -34,9 +34,12 @@ const Header = () => {
           z-index: 1100;
           box-shadow: 0 4px 16px rgba(0,0,0,0.10);
           border-radius: 0 0 24px 24px;
-          background: linear-gradient(90deg, #7185dcff 0%, #feb47b 100%);
+      background-image: url(${background});
           min-height: 150px;
           transition: min-height 0.2s;
+          repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
         }
         .mahalaxmi-title {
           font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
@@ -124,19 +127,19 @@ const Header = () => {
         }
         @media (max-width: 768px) {
           .mahalaxmi-title {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             margin-left: 6px;
             margin-top: 0;
           }
           .header-logo-img {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 45px;
             margin-right: 6px;
           }
           .header-search-col {
             min-width: 60px;
             margin-top: 8px;
-            margin-left: 6px;
+            margin-left: 20px;
           }
           .custom-header-row {
             flex-direction: column !important;

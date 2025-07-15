@@ -259,6 +259,20 @@ async postBill(payload) {
       });
     return response;
     }
+
+     async getVisitor() {
+      const response = await Repository.get('/track')
+      .then((response) => {
+       
+        return response;
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+    return response;
+    }
       }
     
   

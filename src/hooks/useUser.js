@@ -404,6 +404,22 @@ const useAdmin = () => {
     }
   };
 
+   const getvisitor = async () => {
+    try {
+      const response = await UserRepository.getVisitor();
+
+      if (response.status === 200) {
+        console.log(response);
+        setLoading(true);
+        return response;
+      }
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   return {
     userData,
     loading,
@@ -426,7 +442,8 @@ const useAdmin = () => {
     genrateotp,
     Notification,
     updateclient,
-    ContactUs
+    ContactUs,
+    getvisitor
   };
 };
 
